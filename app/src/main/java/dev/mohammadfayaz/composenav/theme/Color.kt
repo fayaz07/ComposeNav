@@ -1,4 +1,4 @@
-package dev.mohammadfayaz.composenav.ui.theme
+package dev.mohammadfayaz.composenav.theme
 
 import androidx.compose.ui.graphics.Color
 
