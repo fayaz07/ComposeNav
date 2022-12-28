@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,17 +17,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import dev.mohammadfayaz.composenav.data.PostsData
 import dev.mohammadfayaz.composenav.navbar.bottom.BottomNavigationActivity
 import dev.mohammadfayaz.composenav.theme.ComposeNavTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    loadData()
+
     setContent {
       ComposeNavTheme {
         ScaffoldBody()
       }
+    }
+  }
+
+  private fun loadData() {
+    CoroutineScope(Dispatchers.IO).launch {
+      PostsData.loadData(
+        resources.openRawResource(R.raw.posts)
+      )
     }
   }
 
